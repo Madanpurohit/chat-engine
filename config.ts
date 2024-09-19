@@ -11,7 +11,6 @@ const uiConfig: AlchemyAccountsUIConfig = {
   auth: {
     sections: [
       [{ type: "email" as const }],
-      [{ type: "passkey" as const }, { type: "external_wallets" }],
     ],
     addPasskeyOnSignup: false,
   },
@@ -19,10 +18,11 @@ const uiConfig: AlchemyAccountsUIConfig = {
 
 export const config = createConfig(
   {
-    apiKey: "alchemy_api_key", // TODO: insert your Alchemy API key - setup your app & embedded account config at https://dashboard.alchemy.com/accounts
+    apiKey: "XXXXXX", 
     chain: sepolia,
-    ssr: true, // read more about server side rendering (ssr) practices: https://accountkit.alchemy.com/react/ssr
-    storage: cookieStorage, // read more about persisting state with cookies: https://accountkit.alchemy.com/react/ssr#persisting-the-account-state
+    ssr: true, 
+    storage: cookieStorage, 
+    policyId: "XXXXXX"
   },
   uiConfig
 );
