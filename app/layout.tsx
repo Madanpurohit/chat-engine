@@ -9,8 +9,8 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Embedded Accounts UI Components Quickstart NextJs Template",
-  description: "Embedded Accounts UI Components Quickstart NextJs Template",
+  title: "Decentralized chat app",
+  description: "Decentralized chat app",
 };
 
 export default function RootLayout({
@@ -18,8 +18,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Persist state across pages
-  // https://accountkit.alchemy.com/react/ssr#persisting-the-account-state
   const initialState = cookieToInitialState(
     config,
     headers().get("cookie") ?? undefined
