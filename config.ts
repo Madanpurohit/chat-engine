@@ -16,13 +16,14 @@ const uiConfig: AlchemyAccountsUIConfig = {
   },
 };
 
+
 export const config = createConfig(
   {
-    apiKey: "XXXXXX", 
+    apiKey: process.env.NEXT_PUBLIC_API_KEY || "", 
     chain: sepolia,
     ssr: true, 
     storage: cookieStorage, 
-    policyId: "XXXXXX"
+    policyId: process.env.NEXT_PUBLIC_POLICY_ID
   },
   uiConfig
 );

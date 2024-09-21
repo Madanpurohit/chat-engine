@@ -6,23 +6,20 @@ import React, { useState, useRef, useEffect } from "react";
 import { encodeFunctionData } from "viem";
 import { abi } from "../abi/Chatter.json";
 import { useLogout, useSendUserOperation, useSmartAccountClient } from "@account-kit/react";
-import { getContractEvents } from "viem/actions";
 import JazziconImage from "./JazzIcon";
 
 interface Message {
   id: number;
   text: string;
   sender: string;
-  timestamp: string;
-  avatar: string;
 }
 
 interface User {
   id: number;
   name: string;
   status: "online" | "offline";
-  avatar: string;
 }
+
 
 export default function  DesktopGroupChatTailwind() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -76,16 +73,15 @@ export default function  DesktopGroupChatTailwind() {
         address: '0x63707323a76d952a6d09886e4c4f3e25d4bd0bab',
         abi,
         eventName: 'Chatter__SendMessage',
-        fromBlock: blockNumber - BigInt(5000),
+        fromBlock: blockNumber - BigInt(20000),
         toBlock: 'latest'
       }).then((messages)=>{
-        console.log(messages);
         let initialMessages: Message[] = [];
         let initialUser: User[] = [];
         let uniqueUser:Set<String> = new Set();
-        let id = 0;
-        let idUser = 0;
-        messages.forEach((ele)=>{
+        let id:number = 0;
+        let idUser:number= 0;
+        messages.forEach((ele:any)=>{
           const newMessage: Message = {
             id: id + 1,
             text: ele?.args?.message,
@@ -96,7 +92,6 @@ export default function  DesktopGroupChatTailwind() {
               id: idUser+1,
               name: ele?.args?.sender,
               status: "online"
-
             }
             uniqueUser.add(ele?.args?.sender);
             initialUser.push(newUser);
@@ -116,13 +111,11 @@ export default function  DesktopGroupChatTailwind() {
     abi,
     config,
     eventName: 'Chatter__SendMessage',
-    onLogs(logs) {
-      console.log('New logs!', logs)
+    onLogs(logs:any) {
       const newMessage: Message = {
         id: messages.length+1,
         text: logs[0]?.args?.message,
         sender: logs[0]?.args?.sender,
-        avatar: "",
       };
       setMessages([...messages,newMessage]);
     },
